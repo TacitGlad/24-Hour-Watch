@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>24 Hour Watch</title>
+    <title>24 Hour Watch Costa Rica UTC-6</title>
     <head>
         <style>
             body {
@@ -13,6 +13,8 @@
 
             #watch {
                 --Watch-color: #000000;
+                --Night-color: #000000;
+                --Day-color: rgba(30, 50, 54, 0.65);
                 --Watch-size: 400px;
                 --H-hand-width: 3.5%;
                 --M-hand-width: 2.5%;
@@ -25,9 +27,11 @@
                 position: absolute;
                 width: var(--Watch-size);
                 height: var(--Watch-size);
+                background-image: conic-gradient(from 180deg, var(--Night-color) 90deg, var(--Day-color) 120deg, var(--Day-color) 240deg, var(--Night-color) 270deg);
+                border-radius: 50%;
             }
             #panel {
-                background-color: var(--Watch-color);
+                background-image: radial-gradient(var(--Watch-color) 25%, #16181661 31%, var(--Watch-color) 65%);                
                 width: 100%;
                 height: 100%;
                 border-radius: 50%;
@@ -79,6 +83,27 @@
                 border-color: rgba(2, 1, 2, 0.48);
                 z-index: 100;
             }
+            #caption {
+                left: 50%;
+                top: 35%;
+                width: 50%;
+                height: 7%;
+                /* background: rgb(85, 107, 47); */
+                position: absolute;
+                transform: translate(-50%);
+                /* border-radius: 5px; */
+                /* border-style: dashed; */
+                /* border-color: rgba(2, 1, 2, 0.48); */
+                color: yellowgreen;
+                z-index: 96;
+                text-align: center;
+                font-family: cursive;
+                font-size: 150% !important;
+            }
+            #caption:hover {
+                font-weight: bolder;
+            }
+
             .number {
                 position: absolute;
                 transform: translate(-50%, -50%);
@@ -133,6 +158,12 @@
                 position: absolute;
                 display: none;
             }
+            #sign {
+                position: absolute;
+                bottom: -9%;
+                right: -65%;
+
+            }
         </style>
     </head>
 </head>
@@ -143,11 +174,29 @@
             <div id="M_hand"></div>
             <div id="S_hand"></div>
             <div id="center"></div>
+            <div id="caption"></div>
+            
+        </div>
+        <div id="sign">
+            <label style="font-style: italic; color: darkblue;">
+            "Con aprecio, de un admirador de los Ticos."
+            </label> 
+            <label style="color: rgb(112 128 144 / 31%);margin-left: 5px;">TacitGlad</label>
         </div>
     </div>
     <div id="setting"></div>
 </body>
 <script>
+    let Caption="Costa Rica";
+    let timezone="UTC-6";
+    document.getElementById("caption").innerHTML=Caption;
+    function get_timezone() {
+        if(timezone!='Local'){
+            timezone=(parseInt(timezone.slice(3)));
+        }
+    }
+    get_timezone();
+
     function calc_deg(rad) { return rad*360/Math.PI/2; }
     function calc_rad(deg) { return deg*2*Math.PI/360; }
 
@@ -286,10 +335,18 @@
             return;
         }
         var time = new Date();
+        if(timezone!='Local'){
+            // console.log("Local -",time);
+            time.setTime(time.getTime() + time.getTimezoneOffset()*60*1000);
+            // console.log("UTC 0 -",time);
+            time.setTime(time.getTime() + timezone*60*60*1000);
+            // console.log("UTC ? -",time);
+        }
         var value;
         if (hand_pref == "H") value = time.getHours() + time.getMinutes()/number_bounds['M'];
         else if (hand_pref == "M") value = time.getMinutes() + time.getSeconds()/number_bounds['S'];
         else if (hand_pref == "S") value = time.getSeconds() + time.getMilliseconds()/1000
+
         var deg = tilt_degs[hand_pref] + value/number_bounds[hand_pref] * 360;
         document.getElementById(hand_pref + '_hand').style.transform = "rotate(" + deg + 'deg)';
         value = parseInt(value);
