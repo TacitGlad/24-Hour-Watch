@@ -1,0 +1,159 @@
+
+body {
+    user-select: none;
+    cursor: default;
+}
+
+#watch {
+    --Watch-color: #000000;
+    --Night-color: #000000;
+    --Day-color: rgba(30, 50, 54, 0.65);
+    --Watch-size: 400px;
+    --H-hand-width: 3.5%;
+    --M-hand-width: 2.5%;
+    --S-hand-width: 1%;
+    --H-hand-height: 26%;
+    --M-hand-height: 39%;
+    --S-hand-height: 40%;
+    left: calc(50% - var(--Watch-size)/2);
+    top: calc(50% - var(--Watch-size)/2);
+    position: absolute;
+    width: var(--Watch-size);
+    height: var(--Watch-size);
+    background-image: conic-gradient(from 180deg, var(--Night-color) 90deg, var(--Day-color) 120deg, var(--Day-color) 240deg, var(--Night-color) 270deg);
+    border-radius: 50%;
+}
+#panel {
+    background-image: radial-gradient(var(--Watch-color) 25%, #16181661 31%, var(--Watch-color) 65%);                
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+}
+#H_hand {
+    position: absolute;
+    width: var(--H-hand-width);
+    height: calc(var(--H-hand-height) - 0px);
+    left: calc(50% - var(--H-hand-width)/2);
+    top: calc(50% - var(--H-hand-height));
+    border-radius: 20px 20px 0 0;
+    background-color: rgba(69, 99, 19, 0.9);
+    transform-origin: 50% 100%;
+    z-index: 97;
+}
+#M_hand {
+    position: absolute;
+    width: var(--M-hand-width);
+    height: calc(var(--M-hand-height) - 0px);
+    left: calc(50% - var(--M-hand-width)/2);
+    top: calc(50% - var(--M-hand-height));
+    border-radius: 20px 20px 0 0;
+    background-color: rgba(30, 45, 35, 0.65);
+    transform-origin: 50% 100%;
+    z-index: 98;
+}
+#S_hand {
+    position: absolute;
+    width: var(--S-hand-width);
+    height: calc(var(--S-hand-height) - 0px);
+    left: calc(50% - var(--S-hand-width)/2);
+    top: calc(50% - var(--S-hand-height));
+    border-radius: 20px 20px 0 0;
+    background-color: rgba(30, 50, 54, 0.65);
+    transform-origin: 50% 100%;
+    z-index: 99;
+}
+#center {
+    left: 50%;
+    top: 50%;
+    width: 7%;
+    height: 7%;
+    background: rgb(85, 107, 47);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border-style: ridge;
+    border-color: rgba(2, 1, 2, 0.48);
+    z-index: 100;
+}
+#caption {
+    left: 50%;
+    top: 35%;
+    width: 50%;
+    height: 7%;
+    /* background: rgb(85, 107, 47); */
+    position: absolute;
+    transform: translate(-50%);
+    /* border-radius: 5px; */
+    /* border-style: dashed; */
+    /* border-color: rgba(2, 1, 2, 0.48); */
+    color: yellowgreen;
+    z-index: 96;
+    text-align: center;
+    font-family: cursive;
+    font-size: 150% !important;
+}
+#caption:hover {
+    font-weight: bolder;
+}
+
+.number {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+.H.number {
+    color: wheat;
+    font-size: 140%;
+}
+.M.number {
+    color: darkseagreen;
+    font-size: 60%;
+}
+.S.number {
+    color: steelblue;
+    font-size: 60%;
+}
+.number:hover {
+    zoom: 150% !important;
+}
+.number[active="true"] {
+    color: gold !important;
+    font-size: 180% !important;
+    /* zoom: 190% !important; */
+    /* transform: translate(-50%, -50%) scale(2); */
+    transition: all 1.8s;
+    transition-timing-function: ease-in;
+    z-index: 96;
+}
+.number[active="false"] {
+    transition: all 1.8s;
+    transition-timing-function: ease-in;
+    z-index: 0;
+}
+.H.number[actuve="true"] {
+    filter: invert(0%);
+}
+.M.number[actuve="true"] {
+    filter: invert(15%);
+}
+.S.number[actuve="true"] {
+    filter: invert(30%);
+}
+.active_level_1 {
+    font-size: 140% !important;
+}
+.active_level_2 {
+    font-size: 140%;
+}
+#setting {
+    margin-left: 60%;
+    margin-left: 3%;
+    position: absolute;
+    display: none;
+}
+#sign {
+    position: absolute;
+    bottom: -9%;
+    right: -65%;
+
+}
