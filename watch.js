@@ -1,6 +1,6 @@
 
     let Caption="Costa Rica";
-    let timezone="UTC-6";
+    let timezone="UTC-6";   //'Local'
     document.getElementById("caption").innerHTML=Caption;
     function get_timezone() {
         if(timezone!='Local'){
