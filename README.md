@@ -1,6 +1,6 @@
 # My Cherished Project
 
-![Project Showcase](./project-image.png)
+
 
 This is a project I created when I fully mastered HTML, CSS, and JavaScript for the second time. 
 
