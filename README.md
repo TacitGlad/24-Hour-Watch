@@ -25,7 +25,7 @@ When I was about to upload it to my portfolio, I realized that this project is m
 ---
 
 ### 📷 Preview
-![Project Screenshot](./Capture.png)
+![Project Screenshot](./Capture.PNG)
 
 > *Perfection is an illusion, but some creations come close.*
 
